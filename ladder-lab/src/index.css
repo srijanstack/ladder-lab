@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme tokens. Light is the default, dark follows the OS unless data-theme is set on <html>. */
+:root {
+  --bg: #e4e8ee; --chrome: #cfd5de; --panel: #f6f7f9; --ink: #19222d; --mute: #566476;
+  --line: #aeb7c3; --accent: #1b5ea8; --accentink: #ffffff; --live: #12904a; --livebg: #d3efdf;
+  --bad: #bf3a31; --warn: #a96d12; --field: #ffffff; --wire: #66727f;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #10151b; --chrome: #1c242d; --panel: #161c23; --ink: #e2e7ed; --mute: #8996a6;
+    --line: #2e3945; --accent: #5aa2ee; --accentink: #0a131e; --live: #3fd07f; --livebg: #12301f;
+    --bad: #ef6b61; --warn: #e0b24f; --field: #0e1318; --wire: #6b7886; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #10151b; --chrome: #1c242d; --panel: #161c23; --ink: #e2e7ed; --mute: #8996a6;
+  --line: #2e3945; --accent: #5aa2ee; --accentink: #0a131e; --live: #3fd07f; --livebg: #12301f;
+  --bad: #ef6b61; --warn: #e0b24f; --field: #0e1318; --wire: #6b7886; color-scheme: dark;
+}
+
+html, body { height: 100%; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  margin: 0;
+  font-family: "IBM Plex Sans", "Segoe UI", Tahoma, sans-serif;
+  font-size: 13px;
+}
+#root { min-height: 100%; }
+@media (min-width: 1024px) { #root { height: 100%; } }
+
+button { font: inherit; cursor: pointer; }
+button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+.tabnum { font-variant-numeric: tabular-nums; }
+.btn { border: 1px solid var(--line); background: var(--panel); padding: 3px 9px; border-radius: 2px; color: var(--ink); }
+.btn:hover { background: var(--field); }
+.btn[aria-pressed="true"] { background: var(--accent); color: var(--accentink); border-color: var(--accent); }
+.scroll-thin { scrollbar-width: thin; }
+
+.flow { stroke-dasharray: 7 7; animation: flow .7s linear infinite; }
+@keyframes flow { to { stroke-dashoffset: -14; } }
+.armed-slot { animation: pulse 1.1s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: .45; } }
+@media (prefers-reduced-motion: reduce) { .flow, .armed-slot { animation: none; } }
